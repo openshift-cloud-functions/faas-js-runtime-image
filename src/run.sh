@@ -5,7 +5,7 @@ set -x
 cd /home/node/usr
 
 if [ -f package.json ] ; then
-  npm install --no-cache
+  npm install
 fi
 
 cd ../src
