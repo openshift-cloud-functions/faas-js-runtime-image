@@ -47,9 +47,9 @@ EXPECTED='This is the test function for Node.js FaaS'
 RESPONSE=$(curl http://localhost:8080)
 
 if [ "${RESPONSE}" == "${EXPECTED}" ] ; then
-  echo "Got expected response ${RESPONSE}"
+  echo "Got expected response '${RESPONSE}'"
 else
-  echo "Unexepected response received from function ${RESPONSE}"
+  echo "Unexepected response received from function '${RESPONSE}'"
   fail
 fi
 

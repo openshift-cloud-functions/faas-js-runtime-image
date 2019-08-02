@@ -1,0 +1,61 @@
+# FaaS Node.js Runtime Image
+
+This image is meant to run in an OpenShift cluster with Knative installed.
+It is currently under development and incomplete. When a container for this
+image starts, a process loads the JavaScript in `/home/node/usr` on the container
+file system. If there is a  `package.json` file in the directory, the bootstrap
+process will run `npm install` before loading the function.
+
+## Limitations
+
+* The image currently only responds to `HTTP` requests on port `8080`. There
+is no functionality yet to respond to arbitrary events outside of the `HTTP`
+protocol.
+* The function is passed a `Context` object when it is called. This object
+currently contains little to no valuable information beyond the Node.js
+[`http.IncomingMessage`](https://nodejs.org/api/http.html#http_class_http_incomingmessage) (the request) and 
+[`http.ServerResponse`](https://nodejs.org/api/http.html#http_class_http_serverresponse) objects.
+
+Surely there are other limitations, but this is enough for plenty of discussion
+at the moment.
+
+## Building
+
+To build the image, run the following command.
+
+```sh
+make build
+```
+
+You should end up with an image at `redhat-faas/js-runtime`.
+
+## Running locally
+
+You can run this image locally to play around with it, test edges and 
+generally get a feel for how it works. First, create a directory containing
+one or more JavaScript files. One of these must be named `index.js`. The
+bootstrap process will load this file and any other files it references
+via module dependencies (e.g. `const myCalc = require('./my-calc.js);`).
+If you have external, third party dependencies from npmjs.com, add a
+`package.json` to the directory specifying the `dependencies`. 
+
+With the source in place, you can start the container and mount the source
+onto a container directory. The bootstrap process expects `/home/node/usr`
+to contain the runtime source code. To mount this into a running container
+execute the following command.
+
+```sh
+docker run --rm --cidfile my-faas-test.cid -a stdout -a stderr -v /path/to/local/source/dir:/home/node/usr -p 8080:8080 redhat-faas/js-runtime &
+```
+
+## Testing
+
+To test the image, run the following command.
+
+```sh
+make test
+```
+
+This will build a candidate image, and mount the `./test` directory on the host
+to the `/home/node/usr` directory on the running container. When the container
+starts, a bootstrap process loads the test JavaScript in `/home/node/usr`. 
