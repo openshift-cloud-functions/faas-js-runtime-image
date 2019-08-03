@@ -1,7 +1,6 @@
-// This is the default function for a FaaS
-// instance. In practice, this file is
-// overwritten by user code during image
-// spin up.
+// This is a test function that ensures a module specified
+// in package.json can be loaded and run during function runtime.
+// See: test/run.sh
 
 const isNumber = require('is-number')
 
