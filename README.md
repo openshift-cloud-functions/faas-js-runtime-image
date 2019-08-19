@@ -1,4 +1,4 @@
-# FaaS Node.js Runtime Image
+# FaaS Node.js Runtime Image [![CircleCI](https://circleci.com/gh/openshift-cloud-functions/faas-js-runtime-image.svg?style=svg)](https://circleci.com/gh/openshift-cloud-functions/faas-js-runtime-image)
 
 This image is meant to run in an OpenShift cluster with Knative installed.
 It is currently under development and incomplete. When a container for this
