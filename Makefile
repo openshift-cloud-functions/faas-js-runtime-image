@@ -1,4 +1,4 @@
-IMAGE_NAME = redhat-faas/js-runtime
+IMAGE_NAME = quay.io/lanceball/js-runtime
 TEST_IMAGE = $(IMAGE_NAME)-candidate
 
 .PHONY: build test

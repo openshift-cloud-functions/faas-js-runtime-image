@@ -50,13 +50,14 @@ echo "Building image..."
 docker build -t ${TEST_IMAGE} .
 
 echo "Starting container for ${TEST_IMAGE}..."
+echo "docker run --rm --cidfile faas-test.cid -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8080:8080 ${TEST_IMAGE} &"
 docker run --rm --cidfile faas-test.cid -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8080:8080 ${TEST_IMAGE} &
 
 echo "Giving it a few seconds to initialize..."
 sleep 3
 
 echo "Contacting runtime function..."
-EXPECTED='This is the test function for Node.js FaaS'
+EXPECTED='This is the test function for Node.js FaaS. Success.'
 RESPONSE=$(curl http://localhost:8080)
 
 if [ "${RESPONSE}" == "${EXPECTED}" ] ; then

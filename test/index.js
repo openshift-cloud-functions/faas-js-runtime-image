@@ -5,7 +5,7 @@
 const isNumber = require('is-number')
 
 module.exports = context => {
-  const ret = 'This is the test function for Node.js FaaS';
+  const ret = 'This is the test function for Node.js FaaS. Success.';
   if (isNumber(ret)) throw new Error('Something is wrong with modules');
   return ret;
 };
