@@ -50,8 +50,8 @@ echo "Building image..."
 docker build -t ${TEST_IMAGE} .
 
 echo "Starting container for ${TEST_IMAGE}..."
-echo "docker run --rm --cidfile faas-test.cid -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8080:8080 ${TEST_IMAGE} &"
-docker run --rm --cidfile faas-test.cid -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8080:8080 ${TEST_IMAGE} &
+echo "docker run --rm --cidfile faas-test.cid -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8181:8181 ${TEST_IMAGE} &"
+docker run --rm --cidfile faas-test.cid -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8181:8181 ${TEST_IMAGE} &
 
 echo "Giving it a few seconds to initialize..."
 sleep 3

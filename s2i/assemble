@@ -1,0 +1,21 @@
+#!/bin/sh
+set -x
+
+# Copy user source to /home/node/usr
+cp -Rfpv /tmp/src/* /home/node/usr
+
+# Install user dependencies if they exist
+cd /home/node/usr
+if [ -f package.json ] ; then
+  npm install --only=prod
+fi
+
+# Install function framework dependencies
+cd /home/node/src
+npm install --only=prod
+
+# Hack
+cp -Rfpv /home/node/usr/node_modules/* /home/node/src/node_modules/
+
+# Uncomment for debugging
+ls -l /home/node/usr /home/node/usr/node_modules /home/node/src /home/node/src/node_modules
