@@ -4,13 +4,12 @@ EXPOSE 8080
 
 COPY src /home/node/src
 
-RUN mkdir -p /home/node/usr/.npm && \
-  chmod -R a+g /home/node/usr && \
-  chmod -R a+g /home/node/src && \
+RUN mkdir -p /home/node/usr && \
+  chmod -R 777 /home/node && \
   cd /home/node/src && \
   npm install
 
-ENV HOME /home/node/usr
+ENV HOME /home/node
 
 USER 1001
 
