@@ -1,6 +1,6 @@
 FROM node:12-alpine
 
-EXPOSE 8181
+EXPOSE 8080
 
 COPY src /home/node/src
 COPY s2i /usr/libexec/s2i
