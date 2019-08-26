@@ -14,6 +14,4 @@ ENV HOME /home/node
 
 USER 1001
 
-ENV HOME /home/node/usr
-
 CMD ["/home/node/src/run.sh"]
