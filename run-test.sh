@@ -12,6 +12,7 @@ remove_container_id_file () {
 remove_node_modules () {
   rm -rf test/node_modules
   rm -f test/package-lock.json
+  rm -rf test/.npm
   rm -rf test/false # TODO: What is this dir doing here?
 }
 

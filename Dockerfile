@@ -3,6 +3,7 @@ FROM node:12-alpine
 EXPOSE 8080
 
 COPY src /home/node/src
+COPY s2i /usr/libexec/s2i
 
 RUN mkdir -p /home/node/usr && \
   chmod -R 777 /home/node && \

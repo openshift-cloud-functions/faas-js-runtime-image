@@ -1,0 +1,9 @@
+#!/bin/sh
+set -x
+
+# Uncomment for debugging
+ls -l /home/node/usr /home/node/usr/node_modules /home/node/usr/node_modules/is-number /home/node/src /home/node/src/node_modules /home/node/src/node_modules/is-number
+
+cd /home/node/src
+
+NODE_PATH=/home/node/usr:/home/node/src node .

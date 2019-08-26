@@ -6,6 +6,11 @@ image starts, a process loads the JavaScript in `/home/node/usr` on the containe
 file system. If there is a  `package.json` file in the directory, the bootstrap
 process will run `npm install` before loading the function.
 
+## Source to Image
+
+This image may also be used as a [source to image builder](https://github.com/openshift/source-to-image).
+
+
 ## Limitations
 
 * The image currently only responds to `HTTP` requests on port `8080`. There
