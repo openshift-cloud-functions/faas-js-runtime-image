@@ -4,9 +4,10 @@
 # set -x
 
 TEST_IMAGE=$1
+CID_FILE=`date +%s`$$.cid
 
 remove_container_id_file () {
-  rm -f faas-test.cid
+  rm -f $CID_FILE
 }
 
 remove_node_modules () {
@@ -31,11 +32,28 @@ test_probe () {
 
 cleanup () {
   echo "Stopping ${TEST_IMAGE}..."
-  docker stop $(cat faas-test.cid)
+  docker stop $(cat ${CID_FILE})
 
   echo "Removing generated test files..."
   remove_container_id_file
   remove_node_modules
+}
+
+wait_for_cid() {
+  wait_for_file $CID_FILE
+}
+
+wait_for_file() {
+  local max_attempts=10
+  local sleep_time=1
+  local attempt=1
+  local result=1
+  while [ $attempt -le $max_attempts ]; do
+    [ -f $1 ] && [ -s $1 ] && break
+    echo "Waiting for $1..."
+    attempt=$(( $attempt + 1 ))
+    sleep $sleep_time
+  done
 }
 
 fail () {
@@ -43,19 +61,17 @@ fail () {
   exit 1
 }
 
-# Make sure no stray container ID files are hanging out
-remove_container_id_file
 echo "Testing ${TEST_IMAGE}"
-
 echo "Building image..."
 docker build -t ${TEST_IMAGE} .
 
 echo "Starting container for ${TEST_IMAGE}..."
-echo "docker run --rm --cidfile faas-test.cid -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8080:8080 ${TEST_IMAGE} &"
-docker run --rm --cidfile faas-test.cid -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8080:8080 ${TEST_IMAGE} &
+echo "docker run --rm --cidfile ${CID_FILE} -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8080:8080 ${TEST_IMAGE} &"
+docker run --rm --cidfile ${CID_FILE} -a stdout -a stderr -v $(pwd)/test:/home/node/usr -p 8080:8080 ${TEST_IMAGE} &
 
 echo "Giving it a few seconds to initialize..."
-sleep 3
+wait_for_cid
+wait_for_file "package-lock.json"
 
 echo "Contacting runtime function..."
 EXPECTED='This is the test function for Node.js FaaS. Success.'
