@@ -13,13 +13,14 @@ This image may also be used as a [source to image builder](https://github.com/op
 
 ## Limitations
 
-* The image currently only responds to `HTTP` requests on port `8080`. There
-is no functionality yet to respond to arbitrary events outside of the `HTTP`
-protocol.
+* The image currently responds to `HTTP` requests on port `8080` and to Knative Events, which users can
+consume as `CloudEvent` object.
 * The function is passed a `Context` object when it is called. This object
 currently contains little to no valuable information beyond the Node.js
-[`http.IncomingMessage`](https://nodejs.org/api/http.html#http_class_http_incomingmessage) (the request) and 
-[`http.ServerResponse`](https://nodejs.org/api/http.html#http_class_http_serverresponse) objects.
+[`http.IncomingMessage`](https://nodejs.org/api/http.html#http_class_http_incomingmessage) (the request), 
+[`http.ServerResponse`](https://nodejs.org/api/http.html#http_class_http_serverresponse) objects and
+[`cloudevent`](https://github.com/cloudevents/spec/blob/v0.3/spec.md) object, which is instantiated if
+the function reponds to incoming Knative Event.
 
 Surely there are other limitations, but this is enough for plenty of discussion
 at the moment.
