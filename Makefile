@@ -1,5 +1,5 @@
 IMAGE_TAG    = 0.0.1
-IMAGE_NAME   = lanceball/js-runtime
+IMAGE_NAME   = openshiftcloudfunctions/js-runtime
 DOCKER_IMAGE = docker.io/$(IMAGE_NAME):$(IMAGE_TAG)
 QUAY_IMAGE   = quay.io/$(IMAGE_NAME):$(IMAGE_TAG)
 TEST_IMAGE   = $(IMAGE_NAME):candidate
@@ -8,7 +8,7 @@ TEST_IMAGE   = $(IMAGE_NAME):candidate
 
 build:
 	docker build -t $(DOCKER_IMAGE) .
-	docker build -t $(QUAY_IMAGE) .
+	# docker build -t $(QUAY_IMAGE) .
 
 test:
 	./run-test.sh $(TEST_IMAGE)
@@ -18,5 +18,5 @@ clean:
 	docker rmi -f `docker images $(IMAGE_NAME) -q`
 
 push:
-	docker push $(QUAY_IMAGE)
+	# docker push $(QUAY_IMAGE)
 	docker push $(DOCKER_IMAGE)
