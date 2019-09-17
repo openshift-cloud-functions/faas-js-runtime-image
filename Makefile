@@ -1,5 +1,5 @@
 IMAGE_TAG    = 0.0.1
-IMAGE_NAME   = openshiftcloudfunctions/js-runtime
+IMAGE_NAME   = oscf/js-runtime
 DOCKER_IMAGE = docker.io/$(IMAGE_NAME):$(IMAGE_TAG)
 QUAY_IMAGE   = quay.io/$(IMAGE_NAME):$(IMAGE_TAG)
 TEST_IMAGE   = $(IMAGE_NAME):candidate
