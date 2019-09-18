@@ -1,6 +1,8 @@
 const http = require('http');
 const Context = require('./context.js');
 const protection = require('overload-protection');
+const cldeventsv02 = require('cloudevents-sdk/v02');
+const cldeventsv03 = require('cloudevents-sdk/v03');
 
 // Default LIVENESS/READINESS urls
 const READINESS_URL = '/health';
@@ -25,6 +27,42 @@ const server = http.createServer((req, res) => {
   // Check if health path
   if (req.url === readinessURL || req.url === livenessURL) {
     protect(req, res, () => res.end("OK"))
+  } else if (('ce-type' in req.headers) && req.headers['ce-type'].startsWith('dev.knative')) {
+    let data = '';
+    req.setEncoding('utf8');
+
+    req.on('data', chunk => {
+      data += chunk;
+      if (data.length === parseInt(req.headers['content-length'], 10)) {
+        // Event 'end' is not emmited at the end of every request,
+        // we have to do that explicitly
+        req.emit('end');
+      }
+    });
+
+    req.on('end', _ => {
+      let unmarshaller;
+      const context = new Context(req, res);
+      const version = req.headers['ce-specversion'];
+      if (version === '0.2') {
+        unmarshaller = new cldeventsv02.HTTPUnmarshaller();
+      } else if (version === '0.3') {
+        unmarshaller = new cldeventsv03.HTTPUnmarshaller();
+      } else {
+        console.warn(`Unknown cloud event version detected: ${version}`);
+        return res.end(context);
+      }
+
+      unmarshaller.unmarshall(data, req.headers)
+        .then(cldevent => {
+          context.cloudevent = cldevent;
+        }).catch(err => {
+          console.error(err);
+          context.error = err;
+        }).finally(_ => {
+          res.end(func(context));
+        });
+    });
   } else {
     res.end(func(new Context(req, res)));
   }
