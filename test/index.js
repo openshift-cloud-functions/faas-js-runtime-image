@@ -7,5 +7,6 @@ const isNumber = require('is-number')
 module.exports = context => {
   const ret = 'This is the test function for Node.js FaaS. Success.';
   if (isNumber(ret)) throw new Error('Something is wrong with modules');
+  if (context.cloudevent) return context.cloudevent.data.message;
   return ret;
 };
