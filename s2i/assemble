@@ -10,5 +10,3 @@ if [ -f package.json ] ; then
   npm install --only=prod
 fi
 
-# Uncomment for debugging
-ls -l /home/node/usr /home/node/usr/node_modules /home/node/src /home/node/src/node_modules
