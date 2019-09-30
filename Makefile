@@ -8,6 +8,7 @@ TEST_IMAGE   = $(IMAGE_NAME):candidate
 
 build:
 	docker build -t $(DOCKER_IMAGE) .
+	docker tag $(IMAGE_NAME):$(IMAGE_TAG) $(TEST_IMAGE)
 	# docker build -t $(QUAY_IMAGE) .
 
 test:
