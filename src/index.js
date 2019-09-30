@@ -41,7 +41,7 @@ const server = http.createServer((req, res) => {
         res.end(err);
       });
   } else {
-    res.end(func(new Context(req, res)));
+    res.end(func(context));
   }
 });
 
