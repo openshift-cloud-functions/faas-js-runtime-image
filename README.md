@@ -41,7 +41,7 @@ You can run this image locally to play around with it, test edges and
 generally get a feel for how it works. First, create a directory containing
 one or more JavaScript files. One of these must be named `index.js`. The
 bootstrap process will load this file and any other files it references
-via module dependencies (e.g. `const myCalc = require('./my-calc.js);`).
+via module dependencies (e.g. `const myCalc = require('./my-calc.js');`).
 If you have external, third party dependencies from npmjs.com, add a
 `package.json` to the directory specifying the `dependencies`. 
 
