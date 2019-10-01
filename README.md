@@ -51,7 +51,13 @@ to contain the runtime source code. To mount this into a running container
 execute the following command.
 
 ```sh
-docker run --rm --cidfile my-faas-test.cid -a stdout -a stderr -v /path/to/local/source/dir:/home/node/usr -p 8080:8080 redhat-faas/js-runtime &
+docker run --rm -a stdout -a stderr -v /path/to/local/source/dir:/home/node/usr -p 8080:8080 oscf/js-runtime:candidate
+```
+
+To stop the running container:
+```sh
+$ docker ps
+$ docker stop <CONTAINER ID>
 ```
 
 ## Testing
