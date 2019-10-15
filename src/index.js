@@ -50,4 +50,8 @@ server.on('clientError', (err, socket) => {
   console.log(err);
 });
 
+server.on('listening', _ => {
+  console.log(`Server listening on port ${server.address().port}`);
+});
+
 server.listen(8080);
