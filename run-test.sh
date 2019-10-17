@@ -31,7 +31,7 @@ test_probe () {
 
 test_http () {
   echo "Testing runtime HTTP function"
-  EXPECTED='This is the test function for Node.js FaaS. Success.'
+  EXPECTED='{"body":"This is the test function for Node.js FaaS. Success."}'
   RESPONSE=$(curl http://localhost:8080)
 
   if [ "${RESPONSE}" == "${EXPECTED}" ] ; then

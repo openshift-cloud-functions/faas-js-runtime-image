@@ -5,8 +5,8 @@ set -x
 cp -Rfpv /tmp/src/* /home/node/usr
 
 # Install user dependencies if they exist
-cd /home/node/usr
-if [ -f package.json ] ; then
-  npm install --only=prod
-fi
+# cd /home/node/usr
+# if [ -f package.json ] ; then
+#   npm install --only=prod
+# fi
 
