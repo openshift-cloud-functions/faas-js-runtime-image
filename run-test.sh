@@ -31,7 +31,7 @@ test_probe () {
 
 test_http () {
   echo "Testing runtime HTTP function"
-  EXPECTED='{"body":"This is the test function for Node.js FaaS. Success."}'
+  EXPECTED='{"message":"This is the test function for Node.js FaaS. Success."}'
   RESPONSE=$(curl http://localhost:8080)
 
   if [ "${RESPONSE}" == "${EXPECTED}" ] ; then
@@ -44,7 +44,7 @@ test_http () {
 
 test_events () {
   echo "Testing cloud events"
-  EXPECTED='Hello eventing!'
+  EXPECTED='{"message":"Hello eventing!"}'
   RESPONSE=$(curl -d "{\"message\": \"Hello eventing!\"}" \
 -H "ce-type: dev.knative.cronjob.event" \
 -H "ce-id: 115fccc4-d65e-4e2d-a669-8f39b0672f6e" \
