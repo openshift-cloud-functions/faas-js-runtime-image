@@ -1,8 +1,9 @@
 {
-  "name": "faas-js-runtime",
+  "name": "js-runtime",
   "version": "1.0.0",
   "dependencies": {
-    "overload-protection": "^1.1.0",
-    "cloudevents-sdk": "v0.3.1"
+    "@redhat/faas-js-runtime": "0.0.2",
+    "cloudevents-sdk": "v0.3.1",
+    "overload-protection": "^1.1.0"
   }
 }
