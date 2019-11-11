@@ -20,7 +20,7 @@ currently contains little to no valuable information beyond the Node.js
 [`http.IncomingMessage`](https://nodejs.org/api/http.html#http_class_http_incomingmessage) (the request), 
 [`http.ServerResponse`](https://nodejs.org/api/http.html#http_class_http_serverresponse) objects and
 [`cloudevent`](https://github.com/cloudevents/spec/blob/v0.3/spec.md) object, which is instantiated if
-the function reponds to incoming Knative Event.
+the function responds to incoming Knative Event.
 
 Surely there are other limitations, but this is enough for plenty of discussion
 at the moment.
