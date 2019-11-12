@@ -1,11 +1,11 @@
 #!/bin/sh
 set -x
 
-# Copy user source to /home/node/usr
-cp -Rfpv /tmp/src/* /home/node/usr
+# Copy user source to ${HOME}/usr
+cp -Rfpv /tmp/src/* ${HOME}/usr
 
 # Install user dependencies if they exist
-cd /home/node/usr
+cd ${HOME}/usr
 if [ -f package.json ] ; then
   npm install --only=prod
 fi

@@ -2,16 +2,18 @@ FROM node:12-alpine
 
 EXPOSE 8080
 
-COPY src /home/node/src
+ARG home_dir="/home/node"
+
+COPY src ${home_dir}/src
 COPY s2i /usr/libexec/s2i
 
-RUN mkdir -p /home/node/usr && \
-  chmod -R 777 /home/node && \
-  cd /home/node/src && \
+RUN mkdir -p ${home_dir}/usr && \
+  chmod -R 777 ${home_dir} && \
+  cd ${home_dir}/src && \
   npm install
 
-ENV HOME /home/node
+ENV HOME $home_dir
 
 USER 1001
 
-CMD ["/home/node/src/run.sh"]
+CMD ${HOME}/src/run.sh

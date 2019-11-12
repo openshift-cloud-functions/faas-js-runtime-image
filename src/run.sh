@@ -3,7 +3,7 @@ set -x
 
 umask 000
 
-cd /home/node/usr
+cd ${HOME}/usr
 
 if [ -f package.json ] ; then
   export NO_UPDATE_NOTIFIER=true
