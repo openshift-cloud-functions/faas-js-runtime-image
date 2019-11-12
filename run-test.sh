@@ -105,11 +105,12 @@ docker run --rm --cidfile ${CID_FILE} -a stdout -a stderr -v $(pwd)/test:/home/n
 
 echo "Giving it a few seconds to initialize..."
 wait_for_cid
-wait_for_file "package-lock.json"
+wait_for_file "test/package-lock.json"
 
 test_http
 test_events
-test_probe "/health"
+test_probe "/health/readiness"
+test_probe "/health/liveness"
 
 echo "Test success. Cleaning up..."
 cleanup

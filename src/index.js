@@ -2,9 +2,10 @@
 
 const path = require('path');
 const framework = require('@redhat/faas-js-runtime');
+const userFunction = require(path.join(`${__dirname},`, '..', 'usr'));
 
-console.log(`Executing in ${__dirname}`);
+const http = require('http');
 
-framework(require(path.join(`${__dirname}`, '..', 'usr')), 8080, server => {
-  console.log('FaaS framework initialized.');
+framework(userFunction, 8080, server => {
+  console.log('FaaS framework initialized');
 });
