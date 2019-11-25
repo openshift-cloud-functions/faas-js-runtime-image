@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+apiVersion: v1
+metadata:
+  name: wasm-example-service
+  namespace: js-example-service
+spec:
+  selector:
+    app: wasm-example-service
+  ports:
+   - protocol: TCP
+     port: 80
+     targetPort: 8080

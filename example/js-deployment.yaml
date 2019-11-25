@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: js-example-service
+  namespace: js-example-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels: &labels
+      app: js-example-service
+  template:
+    metadata:
+      labels: *labels
+    spec:
+      containers:
+        - name: js-example-service
+          image: docker.io/dbevenius/faas-js-example:latest
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: registry-secret

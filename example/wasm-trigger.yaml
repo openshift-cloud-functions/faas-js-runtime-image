@@ -1,0 +1,16 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: wasm-trigger
+  namespace: js-example-service
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.nodeshift.samples.fromjs
+      source: nodeshift/samples/js-example-service
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: wasm-example-service

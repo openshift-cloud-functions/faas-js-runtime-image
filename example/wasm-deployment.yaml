@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wasm-example-service
+  namespace: js-example-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels: &labels
+      app: wasm-example-service
+  template:
+    metadata:
+      labels: *labels
+    spec:
+      containers:
+        - name: wasm-example-service
+          image: docker.io/dbevenius/faas-wasm-example:latest
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: registry-secret

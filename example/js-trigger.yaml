@@ -1,0 +1,16 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: js-example-service
+  namespace: js-example-service
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.nodeshift.samples.js-example
+      source: dev.nodeshift.samples/js-example-source
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: js-example-service
