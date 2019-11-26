@@ -2,8 +2,8 @@
 set -x
 
 # Uncomment for debugging
-# ls -l /home/node/usr /home/node/usr/node_modules /home/node/usr/node_modules/is-number /home/node/src /home/node/src/node_modules /home/node/src/node_modules/is-number
+# ls -l ${HOME}/usr ${HOME}/usr/node_modules ${HOME}/usr/node_modules/is-number ${HOME}/src ${HOME}/src/node_modules ${HOME}/src/node_modules/is-number
 
-cd /home/node/src
+cd ${HOME}/src
 
-NODE_PATH=/home/node/usr:/home/node/src node .
+NODE_PATH=${HOME}/usr:${HOME}/src node .
