@@ -33,7 +33,7 @@ To build the image, run the following command.
 make build
 ```
 
-You should end up with an image at `redhat-faas/js-runtime`.
+You should end up with an image at `oscf/js-runtime`.
 
 ## Running locally
 
