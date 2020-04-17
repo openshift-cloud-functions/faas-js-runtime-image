@@ -12,4 +12,4 @@ fi
 
 cd ../src
 
-node .
+exec node .
